@@ -2,9 +2,8 @@ package com.rea.tours.controller;
 
 
 import com.rea.tours.service.IProductService;
-import com.rea.tours.utils.DateUtils;
 import com.rea.tours.utils.myDateEdit;
-import com.rea.toursweb.domain.Product;
+import com.rea.tours.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;

@@ -1,6 +1,6 @@
 package com.rea.tours.service;
 
-import com.rea.toursweb.domain.Product;
+import com.rea.tours.domain.Product;
 
 import java.util.List;
 

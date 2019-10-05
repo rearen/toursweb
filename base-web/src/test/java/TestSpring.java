@@ -1,5 +1,5 @@
 import com.rea.tours.service.IProductService;
-import com.rea.toursweb.domain.Product;
+import com.rea.tours.domain.Product;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

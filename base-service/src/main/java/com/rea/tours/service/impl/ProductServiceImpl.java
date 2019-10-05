@@ -2,7 +2,7 @@ package com.rea.tours.service.impl;
 
 import com.rea.tours.dao.IProductDao;
 import com.rea.tours.service.IProductService;
-import com.rea.toursweb.domain.Product;
+import com.rea.tours.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

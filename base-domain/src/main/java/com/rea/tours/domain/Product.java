@@ -1,4 +1,4 @@
-package com.rea.toursweb.domain;
+package com.rea.tours.domain;
 
 import com.rea.tours.utils.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;

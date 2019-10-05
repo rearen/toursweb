@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--导入属性配置 -->
+    <classPathEntry
+            location="D:\study\j2ee\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>
+    <!--    <properties resource="D:\study\j2ee\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"></properties>-->
+    <!--指定特定数据库的jdbc驱动jar包的位置 -->
+    <!--    <classPathEntry location="${jdbc.driverLocation}"/>-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+<!--        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+<!--        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>-->
+
+        <!-- optional，旨在创建class时，对注释进行控制 -->
+        <commentGenerator>
+            <!-- 这个元素用来去除指定生成的注释中是否包含生成的日期 false:表示包含 -->
+            <!-- 如果生成日期，会造成即使修改一个字段，整个实体类所有属性都会发生变化，不利于版本控制，所以设置为true -->
+            <property name="suppressDate" value="true"/>
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <!-- 是否去除自动生成的注释 true：是 ： 默认：false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--配置数据库连接信息  -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/tours_db"
+                        userId="root"
+                        password="12345">
+        </jdbcConnection>
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <!-- This property is used to specify whether MyBatis Generator should
+             force the use of java.math.BigDecimal for DECIMAL and NUMERIC fields, -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+            targetPackage     指定生成的model生成所在的包名
+            targetProject     指定在该项目下所在的路径
+        -->
+        <!--指定javaBean生成的位置  -->
+        <javaModelGenerator
+                targetPackage="com.rea.tours.domain"
+                targetProject="..\base-domain\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!--指定sql映射文件生成的位置，可选项  -->
+<!--        <sqlMapGenerator-->
+<!--                targetPackage="com.rea.tours.dao"-->
+<!--                targetProject="..\base-dao\src\main\resources">-->
+<!--            <property name="enableSubPackages" value="true"/>-->
+<!--        </sqlMapGenerator>-->
+
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                        type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                        type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                        type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+                -->
+        <!--指定dao接口生成的位置 .mapper接口  -->
+        <javaClientGenerator type="ANNOTATEDMAPPER"
+                             targetPackage="com.rea.tours.dao"
+                             targetProject="..\base-dao\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--table指定每个表得生成策略  -->
+        <table tableName="member" domainObjectName="Member" mapperName="IMemberDao" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+<!--        <table tableName="orders" domainObjectName="Orders" mapperName="IOrderDao" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+<!--        </table>-->
+        <table tableName="traveller" domainObjectName="Traveller" mapperName="ITraveller" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
