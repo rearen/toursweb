@@ -36,13 +36,16 @@
         <!-- 退出 -->
         <security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/login.jsp"/>
 
+        <!-- 如果没有访问权限，配置跳转的页面 -->
+        <security:access-denied-handler error-page="/403.jsp"/>
+
     </security:http>
 
     <!-- 切换成数据库中的用户名和密码 -->
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userService">
-            <!-- 配置加密的方式
-            <security:password-encoder ref="passwordEncoder"/>-->
+            <!-- 配置加密的方式-->
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
@@ -58,5 +61,8 @@
     	</security:authentication-provider>
     </security:authentication-manager>
     -->
+    <!--security注解 -->
+    <security:global-method-security secured-annotations="enabled"/>
+
 
 </beans>

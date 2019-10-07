@@ -9,16 +9,22 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements IUserService
 {
     @Autowired
     private IUserDao userdao;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
@@ -32,11 +38,14 @@ public class UserServiceImpl implements IUserService
         {
             e.printStackTrace();
         }
-        //处理自己的用户对象封装成UserDetails
+        //把自己的用户对象封装成UserDetails
         //User user=new User(userInfo.getUsername(),"{noop}"+userInfo.getPassword(),getAuthority(userInfo.getRoles()));
-        User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(),
+        User user = new User(userInfo.getUsername(), userInfo.getPassword(),
                 userInfo.getStatus() == 0 ? false : true, true, true,
                 true, getAuthority(userInfo.getRoles()));
+//        User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(),
+//                userInfo.getStatus() == 0 ? false : true, true, true,
+//                true, getAuthority(userInfo.getRoles()));
         return user;
     }
 
@@ -50,5 +59,39 @@ public class UserServiceImpl implements IUserService
             list.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         }
         return list;
+    }
+
+    @Override
+    public List<UserInfo> findAll()
+    {
+
+        return userdao.findAll();
+    }
+
+    @Override
+    public void save(UserInfo user)
+    {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userdao.save(user);
+    }
+
+    @Override
+    public UserInfo findById(String id)
+    {
+        return userdao.findById(id);
+    }
+
+    @Override
+    public List<Role> findOtherRole(String userid)
+    {
+        return userdao.findOtherRole(userid);
+    }
+
+    @Override
+    public void addRoleToUser(String userid, String[] roleIds)
+    {
+        for (String roleId:roleIds){
+            userdao.addRoleToUser(userid, roleId);
+        }
     }
 }
