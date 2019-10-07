@@ -48,4 +48,10 @@ public class Permission
     {
         this.roles = roles;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Permission{" + "id='" + id + '\'' + ", permissionName='" + permissionName + '\'' + ", url='" + url + '\'' + ", roles=" + roles + '}';
+    }
 }

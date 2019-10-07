@@ -20,6 +20,13 @@ public interface IRoleDao
               @Many(select = "com.rea.tours.dao.IPermissionDao.findPermissionById"))})
     public List<Role> findRoleByUserId(String userId) throws Exception;
 
+    //根据用户id查询出所有对应的角色
+    @Select("select * from role where id in (select roleId from role_permission where PermissionId=#{PermissionId})")
+    @Results({@Result(id = true,property = "id",column = "id"),
+              @Result(property = "roleName",column = "roleName"),
+              @Result(property = "roleDesc",column = "roleDesc"),})
+    public List<Role> findRoleByPermissionId(String PermissionId) throws Exception;
+
     @Insert("insert into role(id, roleName, roleDesc) VALUES (replace(uuid(),'-',''),#{roleName},#{roleDesc})")
     void save(Role role);
 
