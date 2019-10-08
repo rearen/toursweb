@@ -5,6 +5,7 @@ import com.rea.tours.domain.Role;
 import com.rea.tours.domain.UserInfo;
 import com.rea.tours.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service("userService")
@@ -38,14 +40,24 @@ public class UserServiceImpl implements IUserService
         {
             e.printStackTrace();
         }
+//        Collection<GrantedAuthority> auths=new ArrayList<GrantedAuthority>();
+//        SimpleGrantedAuthority auth2=new SimpleGrantedAuthority("ROLE_ADMIN");
+//        SimpleGrantedAuthority auth1=new SimpleGrantedAuthority("ROLE_USER");
+//        if(username.equals("tom")){
+//
+//            auths=new ArrayList<GrantedAuthority>();
+//            auths.add(auth1);
+//            auths.add(auth2);
+//        }
+
         //把自己的用户对象封装成UserDetails
-        //User user=new User(userInfo.getUsername(),"{noop}"+userInfo.getPassword(),getAuthority(userInfo.getRoles()));
+//        User user=new User(userInfo.getUsername(),"{noop}"+userInfo.getPassword(),getAuthority(userInfo.getRoles()));
         User user = new User(userInfo.getUsername(), userInfo.getPassword(),
                 userInfo.getStatus() == 0 ? false : true, true, true,
                 true, getAuthority(userInfo.getRoles()));
-//        User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(),
-//                userInfo.getStatus() == 0 ? false : true, true, true,
-//                true, getAuthority(userInfo.getRoles()));
+//        User user = new User(username, "123",
+//                true, true, true,
+//                true, auths);
         return user;
     }
 
@@ -71,7 +83,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public void save(UserInfo user)
     {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userdao.save(user);
     }
 

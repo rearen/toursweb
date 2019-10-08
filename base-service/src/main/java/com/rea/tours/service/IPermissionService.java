@@ -9,4 +9,6 @@ public interface IPermissionService
     List<Permission> findAll();
 
     void save(Permission permission);
+
+    Permission findById(String id) throws Exception;
 }

@@ -19,12 +19,20 @@ public interface IPermissionDao
                       many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
 
     })
-    List<Permission> findAll();
+    public List<Permission> findAll();
 
+    //查询与role关联的所有的权限
     @Select("select * from permission where id in (select permissionId from role_permission where roleId=#{roleId})")
-    public List<Permission> findPermissionById(String roleId);
+    public List<Permission> findPermissionByRoleId(String roleId);
 
-//    //查询与role关联的所有的权限
-//    @Select("select * from permission where id in (select permissionId from role_permission where roleId=#{id} )")
-//    public List<Permission> findPermissionByRoleId(String id) throws Exception;
+    //查询permissionid关联的所有的权限
+    @Select("select * from permission where id=#{id}")
+    @Results({@Result(id=true,property = "id",column = "id"),
+              @Result(property = "permissionName",column = "permissionName"),
+              @Result(property = "url",column = "url"),
+              @Result(property = "roles",column = "id",javaType =java.util.List.class,
+                      many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
+
+    })
+    public Permission findById(String id) throws Exception;
 }

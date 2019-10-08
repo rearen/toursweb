@@ -32,4 +32,14 @@ public class PermissionController
         permissionService.save(permission);
         return "redirect:findAll";
     }
+
+    @RequestMapping("/findById")
+    public ModelAndView findById(String id) throws Exception
+    {
+        Permission permissions = permissionService.findById(id);
+        ModelAndView mv =new ModelAndView();
+        mv.addObject("permission", permissions);
+        mv.setViewName("permission-show");
+        return mv;
+    }
 }

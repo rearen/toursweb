@@ -17,7 +17,7 @@ public interface IRoleDao
               @Result(property = "roleName",column = "roleName"),
               @Result(property = "roleDesc",column = "roleDesc"),
               @Result(property = "permissions",column = "id",javaType = java.util.List.class,many=
-              @Many(select = "com.rea.tours.dao.IPermissionDao.findPermissionById"))})
+              @Many(select = "com.rea.tours.dao.IPermissionDao.findPermissionByRoleId"))})
     public List<Role> findRoleByUserId(String userId) throws Exception;
 
     //根据用户id查询出所有对应的角色
@@ -39,7 +39,7 @@ public interface IRoleDao
             @Result(property = "roleName",column = "roleName"),
             @Result(property = "roleDesc",column = "roleDesc"),
             @Result(property = "permissions",column = "id",javaType = java.util.List.class,many = @Many(select = "com" +
-                    ".rea.tours.dao.IPermissionDao.findPermissionById"))
+                    ".rea.tours.dao.IPermissionDao.findPermissionByRoleId"))
     })
     Role findById(String roleId);
 

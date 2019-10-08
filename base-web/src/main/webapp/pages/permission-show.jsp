@@ -86,7 +86,7 @@
                 <li><a href="${pageContext.request.contextPath}/index.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="${pageContext.request.contextPath}/permission/findAll.do">权限管理</a></li>
+                        href="${pageContext.request.contextPath}/permission/findAll">权限管理</a></li>
 
                 <li class="active">全部用户</li>
             </ol>
@@ -142,6 +142,15 @@
                                     <td>${permission.permissionName}</td>
                                     <td>${permission.url}</td>
                                 </tr>
+                                <tbody>
+                                <c:forEach items="${permission.roles}" var="role" varStatus="vs1">
+                                    <tr data-tt-id="${vs1.index+1}" data-tt-parent-id="0">
+                                        <td>${role.roleName}</td>
+                                        <td>${role.roleDesc }</td>
+                                    </tr>
+
+                                </c:forEach>
+                                </tbody>
 
 
                             </table>
