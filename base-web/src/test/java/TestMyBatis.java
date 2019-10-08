@@ -1,9 +1,11 @@
 
 import com.rea.tours.dao.IPermissionDao;
 import com.rea.tours.dao.IProductDao;
+import com.rea.tours.dao.IUserDao;
 import com.rea.tours.domain.Permission;
 import com.rea.tours.domain.Product;
 import com.rea.tours.domain.Role;
+import com.rea.tours.domain.UserInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -30,14 +32,14 @@ public class TestMyBatis {
         // 创建SqlSession对象
         SqlSession session = factory.openSession();
         // 获取到代理对象
-        IPermissionDao dao = session.getMapper(IPermissionDao.class);
+        IUserDao dao = session.getMapper(IUserDao.class);
         //查询所有数据
-        dao.findAll();
+        UserInfo u=dao.findByUsername("tom");
+        System.out.println(u.getRoles());
 
-
-        List<Permission> permissions = dao.findAll();
-        for(Permission p : permissions){
-            System.out.println(p);
+//        List<Permission> permissions = dao.findAll();
+        for(Role r : u.getRoles()){
+            System.out.println(r.getRoleName());
         }
         // 关闭资源
         session.close();
