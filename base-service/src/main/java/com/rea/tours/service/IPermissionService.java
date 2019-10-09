@@ -11,4 +11,6 @@ public interface IPermissionService
     void save(Permission permission);
 
     Permission findById(String id) throws Exception;
+
+    List<Permission> loadPermission(Permission permission);
 }

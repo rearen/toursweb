@@ -7,10 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="basedao" />
-        <module name="baseutils" />
-        <module name="baseservice" />
-        <module name="basedomain" />
+        <module name="base-dao" />
+        <module name="base-service" />
         <module name="baseweb" />
+        <module name="baseutils" />
+        <module name="base-web" />
+        <module name="base-utils" />
+        <module name="base-domain" />
+        <module name="basedomain" />
+        <module name="baseservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

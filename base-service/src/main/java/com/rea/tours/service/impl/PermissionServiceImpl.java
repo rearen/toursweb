@@ -33,4 +33,10 @@ public class PermissionServiceImpl implements IPermissionService
     {
         return permissionDao.findById(id);
     }
+
+    @Override
+    public List<Permission> loadPermission(Permission permission)
+    {
+        return permissionDao.loadPermission(permission);
+    }
 }

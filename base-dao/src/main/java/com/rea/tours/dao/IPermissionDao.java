@@ -3,6 +3,7 @@ package com.rea.tours.dao;
 import com.rea.tours.domain.Permission;
 import com.rea.tours.domain.Product;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ public interface IPermissionDao
     @Select("select * from permission")
     @Results({@Result(id=true,property = "id",column = "id"),
               @Result(property = "permissionName",column = "permissionName"),
-              @Result(property = "url",column = "url"),
-              @Result(property = "roles",column = "id",javaType =java.util.List.class,
-                      many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
+              @Result(property = "url",column = "url")
+//              @Result(property = "roles",column = "id",javaType =java.util.List.class,
+//                      many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
 
     })
     public List<Permission> findAll();
@@ -35,4 +36,8 @@ public interface IPermissionDao
 
     })
     public Permission findById(String id) throws Exception;
+
+    @SelectProvider(type = com.rea.tours.dao.SQLDao.PermissionSQL.class,method = "findPermissionByUserId")
+    public List<Permission> loadPermission(Permission permission);
+
 }

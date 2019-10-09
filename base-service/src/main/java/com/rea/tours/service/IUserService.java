@@ -18,4 +18,6 @@ public interface IUserService
     List<Role> findOtherRole(String userid);
 
     void addRoleToUser(String userid, String[] roleIds);
+
+    UserInfo findByUsername(String username) throws Exception;
 }

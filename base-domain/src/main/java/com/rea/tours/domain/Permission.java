@@ -1,5 +1,7 @@
 package com.rea.tours.domain;
 
+import org.springframework.security.core.userdetails.User;
+
 import java.util.List;
 
 public class Permission
@@ -8,6 +10,7 @@ public class Permission
     private String permissionName;
     private String url;
     private List<Role> roles;
+    private String username; //用于传递username参数
 
     public String getId()
     {
@@ -47,6 +50,14 @@ public class Permission
     public void setRoles(List<Role> roles)
     {
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

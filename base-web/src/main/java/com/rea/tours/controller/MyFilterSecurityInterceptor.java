@@ -6,16 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.web.FilterInvocation;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.*;
 import java.io.IOException;
 
-@Component
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter
 {
     @Autowired
@@ -24,19 +23,22 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
     @Autowired
     private MyAccessDecisionManager accessDecisionManager;
 
-    @Resource
-    private AuthenticationConfiguration authenticationConfiguration;
+//    @Resource
+//    private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    public void setMyAccessDecisionManager(MyAccessDecisionManager myAccessDecisionManager) {
-//        super.setAccessDecisionManager(myAccessDecisionManager);
-//    }
+//    @Resource
+//    private AuthenticationConfiguration authenticationConfiguration;
+
+    @Autowired
+    public void setMyAccessDecisionManager(MyAccessDecisionManager myAccessDecisionManager) {
+        super.setAccessDecisionManager(myAccessDecisionManager);
+    }
 
 
     @PostConstruct
     public void init() throws Exception{
-        super.setAccessDecisionManager(accessDecisionManager);
-        super.setAuthenticationManager(authenticationConfiguration.getAuthenticationManager());
+//        super.setAccessDecisionManager(accessDecisionManager);
+//        super.setAuthenticationManager(authenticationConfiguration.getAuthenticationManager());
     }
 
     @Override
@@ -90,15 +92,15 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         return FilterInvocation.class;
     }
 
-//    public FilterInvocationSecurityMetadataSource getSecurityMetadataSource() {
+    public MyFilterInvocationSecurityMetadataSource getSecurityMetadataSource() {
+
+        return this.securityMetadataSource;
+    }
 //
-//        return this.securityMetadataSource;
-//    }
-//
-//    public void setSecurityMetadataSource(FilterInvocationSecurityMetadataSource newSource)
-//    {
-//        this.securityMetadataSource = newSource;
-//    }
+    public void setSecurityMetadataSource(MyFilterInvocationSecurityMetadataSource newSource)
+    {
+        this.securityMetadataSource = newSource;
+    }
 
     @Override
     public void destroy()

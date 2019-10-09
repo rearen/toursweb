@@ -13,12 +13,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
-public class OrdersController
-{
+public class OrdersController {
     @Autowired
     private IOrdersService ordersService;
 
-    //未分页
+//没有分页查询
 //    @RequestMapping("/findAll")
 //    public ModelAndView findAll() throws Exception{
 //        ModelAndView mv = new ModelAndView();
@@ -30,10 +29,10 @@ public class OrdersController
 
     //分页查询
     @RequestMapping("/findAll")
-    public ModelAndView findAll(@RequestParam(name="page",required = true,defaultValue = "1") int page,
-                                @RequestParam(name="pageSize",required = true,defaultValue = "4") int pageSize)
-            throws Exception{
-        List<Orders> ordersList = ordersService.findAllByPage(page,pageSize);
+    public ModelAndView findAll(@RequestParam(name = "page", required = true, defaultValue = "1") int page,
+                                @RequestParam(name = "pageSize", required = true, defaultValue = "4") int pageSize)
+            throws Exception {
+        List<Orders> ordersList = ordersService.findAllByPage(page, pageSize);
         PageInfo pageInfo = new PageInfo(ordersList);
         ModelAndView mv = new ModelAndView();
         mv.addObject("pageInfo", pageInfo);
@@ -42,9 +41,9 @@ public class OrdersController
     }
 
     @RequestMapping("/findById")
-    public ModelAndView findById(@RequestParam(name = "id",required = true) String ordersId) throws Exception{
-        ModelAndView mv=new ModelAndView();
-        Orders orders=ordersService.findById(ordersId);
+    public ModelAndView findById(@RequestParam(name = "id", required = true) String ordersId) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Orders orders = ordersService.findById(ordersId);
         mv.addObject("orders", orders);
         mv.setViewName("orders-show");
         return mv;

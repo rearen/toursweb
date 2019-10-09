@@ -32,9 +32,9 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
 
 
 
-    public MyFilterInvocationSecurityMetadataSource(){
-        loadResourceDefine();
-    }
+//    public MyFilterInvocationSecurityMetadataSource(){
+//        loadResourceDefine();
+//    }
 
 //    @PostConstruct
 //    public void init() {
@@ -49,42 +49,65 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
      */
     @PostConstruct
     public void loadResourceDefine() {
-        if(urlPermMap==null){
+        if (urlPermMap == null) {
             urlPermMap = new HashMap<String, Collection<ConfigAttribute>>();
-            List<Permission> permissions=permissionDao.findAll();
-            for (Permission p:permissions)
-            {
-                List<ConfigAttribute> authorityList=null;
-                Collection<ConfigAttribute> configAttributes=new ArrayList<>();
-//                // 通过permission表的资源名称来表示具体的权限 注意：必须"ROLE_"开头
-//                ConfigAttribute configAttribute = new SecurityConfig("ROLE_" + p.getPermissionName());
-//                configAttributes.add(configAttribute);
-//                urlPermMap.put(p.getUrl(), configAttributes);
-
-//                用role表来参与逻辑计算
-                for(Role r:p.getRoles()){
-                    ConfigAttribute auth = new SecurityConfig("ROLE_" +r.getRoleName());
-                    authorityList.add(auth);
-                }
-                urlPermMap.put(p.getUrl(), authorityList);
+            List<Permission> list = permissionDao.findAll();
+            for (Permission p : list) {
+                Collection<ConfigAttribute> configAttributes = new ArrayList<ConfigAttribute>();
+                // 通过资源名称来表示具体的权限 注意：必须"ROLE_"开头
+                ConfigAttribute configAttribute = new SecurityConfig("ROLE_" + p.getPermissionName());
+                configAttributes.add(configAttribute);
+                urlPermMap.put(p.getUrl(), configAttributes);
             }
         }
+//        if(urlPermMap==null){
+//            urlPermMap = new HashMap<String, Collection<ConfigAttribute>>();
+//            List<Permission> permissions=permissionDao.findAll();
+//            for (Permission p:permissions)
+//            {
+//                List<ConfigAttribute> authorityList=null;
+//                Collection<ConfigAttribute> configAttributes=new ArrayList<>();
+////                // 通过permission表的资源名称来表示具体的权限 注意：必须"ROLE_"开头
+////                ConfigAttribute configAttribute = new SecurityConfig("ROLE_" + p.getPermissionName());
+////                configAttributes.add(configAttribute);
+////                urlPermMap.put(p.getUrl(), configAttributes);
+//
+////                用role表来参与逻辑计算
+//                for(Role r:p.getRoles()){
+//                    ConfigAttribute auth = new SecurityConfig("ROLE_" +r.getRoleName());
+//                    authorityList.add(auth);
+//                }
+//                urlPermMap.put(p.getUrl(), authorityList);
+//            }
+//        }
     }
 
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException
     {
-
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        System.out.println("requestUrl is " + requestUrl);
-        if(urlPermMap.size()==0)
-        {
+        //	System.out.println("requestUrl is " + requestUrl);
+        if(urlPermMap == null) {
             loadResourceDefine();
         }
-        System.err.println("urlPermMap.get(requestUrl); "+urlPermMap.get(requestUrl));
+        //System.err.println("resourceMap.get(requestUrl); "+resourceMap.get(requestUrl));
         if(requestUrl.indexOf("?")>-1){
             requestUrl=requestUrl.substring(0,requestUrl.indexOf("?"));
         }
-        return urlPermMap.get(requestUrl);
+        Collection<ConfigAttribute> configAttributes = urlPermMap.get(requestUrl);
+        return configAttributes;
+
+
+//        String requestUrl = ((FilterInvocation) o).getRequestUrl();
+//        System.out.println("requestUrl is " + requestUrl);
+//        if(urlPermMap.size()==0)
+//        {
+//            loadResourceDefine();
+//        }
+//        System.err.println("urlPermMap.get(requestUrl); "+urlPermMap.get(requestUrl));
+//        if(requestUrl.indexOf("?")>-1){
+//            requestUrl=requestUrl.substring(0,requestUrl.indexOf("?"));
+//        }
+//        return urlPermMap.get(requestUrl);
 
 //        Set<String> keys = urlPermMap.keySet();
 //        for (String k : keys) {
