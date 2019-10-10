@@ -35,8 +35,8 @@ public class PermissionServiceImpl implements IPermissionService
     }
 
     @Override
-    public List<Permission> loadPermission(Permission permission)
+    public List<Permission> loadPermission(String username)
     {
-        return permissionDao.loadPermission(permission);
+        return permissionDao.loadPermission(username);
     }
 }

@@ -12,5 +12,5 @@ public interface IPermissionService
 
     Permission findById(String id) throws Exception;
 
-    List<Permission> loadPermission(Permission permission);
+    List<Permission> loadPermission(String username);
 }

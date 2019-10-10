@@ -7,15 +7,14 @@ import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
 
-public interface IPermissionDao
-{
+public interface IPermissionDao {
     @Insert("insert into permission(id, permissionName, url) VALUES (replace(uuid(),'-',''),#{permissionName},#{url})")
     void save(Permission permission);
 
     @Select("select * from permission")
-    @Results({@Result(id=true,property = "id",column = "id"),
-              @Result(property = "permissionName",column = "permissionName"),
-              @Result(property = "url",column = "url")
+    @Results({@Result(id = true, property = "id", column = "id"),
+            @Result(property = "permissionName", column = "permissionName"),
+            @Result(property = "url", column = "url")
 //              @Result(property = "roles",column = "id",javaType =java.util.List.class,
 //                      many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
 
@@ -28,16 +27,24 @@ public interface IPermissionDao
 
     //查询permissionid关联的所有的权限
     @Select("select * from permission where id=#{id}")
-    @Results({@Result(id=true,property = "id",column = "id"),
-              @Result(property = "permissionName",column = "permissionName"),
-              @Result(property = "url",column = "url"),
-              @Result(property = "roles",column = "id",javaType =java.util.List.class,
-                      many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
+    @Results({@Result(id = true, property = "id", column = "id"),
+            @Result(property = "permissionName", column = "permissionName"),
+            @Result(property = "url", column = "url"),
+            @Result(property = "roles", column = "id", javaType = java.util.List.class,
+                    many = @Many(select = "com.rea.tours.dao.IRoleDao.findRoleByPermissionId"))
 
     })
     public Permission findById(String id) throws Exception;
 
-    @SelectProvider(type = com.rea.tours.dao.SQLDao.PermissionSQL.class,method = "findPermissionByUserId")
-    public List<Permission> loadPermission(Permission permission);
+//    @SelectProvider(type = com.rea.tours.dao.SQLDao.PermissionSQL.class,method = "findPermissionByUsername")
+//    public List<Permission> loadPermission(String username);
+
+    @Select("SELECT p.permissionName,p.url FROM `permission` p,`role_permission` rp,`" +
+            "users_role` ur,`users` u WHERE p.id=rp.permissionId AND rp.roleId=ur.roleId " +
+            "AND ur.userId=u.id AND u.username=#{username}")
+    @Results({@Result(id = true, property = "id", column = "id"),
+            @Result(property = "permissionName", column = "permissionName"),
+            @Result(property = "url", column = "url")})
+    public List<Permission> loadPermission(String username);
 
 }

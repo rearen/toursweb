@@ -12,6 +12,10 @@ public class Permission
     private List<Role> roles;
     private String username; //用于传递username参数
 
+    public Permission getPermission(){
+        return this;
+    }
+
     public String getId()
     {
         return id;

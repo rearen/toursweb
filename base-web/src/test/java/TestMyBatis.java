@@ -31,15 +31,17 @@ public class TestMyBatis {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
         // 创建SqlSession对象
         SqlSession session = factory.openSession();
+//        Permission permission=new Permission();
+//        permission.setUsername("tom");
         // 获取到代理对象
-        IUserDao dao = session.getMapper(IUserDao.class);
+        IPermissionDao dao = session.getMapper(IPermissionDao.class);
         //查询所有数据
-        UserInfo u=dao.findByUsername("tom");
-        System.out.println(u.getRoles());
+        List<Permission> plist=dao.loadPermission("ii");
+//        System.out.println(plist);
 
 //        List<Permission> permissions = dao.findAll();
-        for(Role r : u.getRoles()){
-            System.out.println(r.getRoleName());
+        for(Permission p : plist){
+            System.out.println(p.getPermissionName());
         }
         // 关闭资源
         session.close();
