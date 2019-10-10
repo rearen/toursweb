@@ -23,11 +23,13 @@
     	use-expressions="false"	是否使用SPEL表达式（没学习过）
     -->
 <!--    <security:http auto-config="false" use-expressions="false">-->
-    <security:http auto-config="false" use-expressions="false">
+    <security:http auto-config="false" use-expressions="true">
         <!-- 配置具体的拦截的规则 pattern="请求路径的规则" access="访问系统的人，必须有ROLE_USER的角色" -->
-<!--        <security:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN"/>-->
+<!--        <security:intercept-urlt pattern="/**" access="ROLE_USER,ROLE_ADMIN"/>-->
+<!--        <security:intercept-url pattern="/**" access="isAuthenticated()"/>-->
 
-        <security:custom-filter ref="myFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
+<!--        <security:custom-filter ref="myFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>-->
+
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
                 login-page="/login.jsp"
@@ -36,6 +38,7 @@
                 authentication-failure-url="/failer.jsp"
                 authentication-success-forward-url="/pages/main.jsp"
         />
+
 
 
         <!-- 关闭跨域请求 -->
@@ -48,11 +51,11 @@
 
     </security:http>
 
-    <bean id="myFilterSecurityInterceptor" class="com.rea.tours.controller.MyFilterSecurityInterceptor" >
-        <property name="authenticationManager" ref="authenticationManager"/>
-        <property name="accessDecisionManager" ref="myAccessDecisionManager"/>
-        <property name="securityMetadataSource" ref="myFilterInvocationSecurityMetadataSource"/>
-    </bean>
+<!--    <bean id="myFilterSecurityInterceptor" class="com.rea.tours.security.MyFilterSecurityInterceptor" >-->
+<!--        <property name="authenticationManager" ref="authenticationManager"/>-->
+<!--        <property name="accessDecisionManager" ref="myAccessDecisionManager"/>-->
+<!--        <property name="securityMetadataSource" ref="myFilterInvocationSecurityMetadataSource"/>-->
+<!--    </bean>-->
 
     <!-- 切换成数据库中的用户名和密码 -->
     <!--在这个类中，你就可以从数据库中读入用户的密码，角色信息，是否锁定，账号是否过期等 -->
@@ -67,11 +70,12 @@
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 
+
     <!--访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
-<!--    <bean id="myAccessDecisionManager" class="com.rea.tours.service.impl.MyAccessDecisionManager"/>-->
-    <!--资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+<!--    <bean id="myAccessDecisionManager" class="com.rea.tours.security.MyAccessDecisionManager"/>-->
+<!--    &lt;!&ndash;资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 &ndash;&gt;-->
 <!--    <bean id="myFilterInvocationSecurityMetadataSource"-->
-<!--          class="com.rea.tours.service.impl.MyFilterInvocationSecurityMetadataSource">-->
+<!--          class="com.rea.tours.security.MyFilterInvocationSecurityMetadataSource">-->
 <!--    </bean>-->
 
     <!-- 提供了入门的方式，在内存中存入用户名和密码

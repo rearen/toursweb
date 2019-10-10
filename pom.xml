@@ -196,7 +196,6 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.15</version>
         </dependency>
-
     </dependencies>
 
 
@@ -261,6 +260,7 @@
         <module>base-dao</module>
         <module>base-utils</module>
         <module>base-web</module>
+        <module>base-security</module>
     </modules>
 
 

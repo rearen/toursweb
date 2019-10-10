@@ -10,6 +10,7 @@
         <module name="base-dao" />
         <module name="base-service" />
         <module name="baseweb" />
+        <module name="base-security" />
         <module name="baseutils" />
         <module name="base-web" />
         <module name="base-utils" />

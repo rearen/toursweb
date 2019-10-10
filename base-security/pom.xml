@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>base-service</artifactId>
+    <artifactId>base-security</artifactId>
+
 
     <build>
         <pluginManagement>
@@ -36,6 +37,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
 
 </project>
