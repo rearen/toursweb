@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("permissionService")
 @Transactional
 public class PermissionServiceImpl implements IPermissionService
 {

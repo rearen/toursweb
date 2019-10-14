@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- 配置不拦截的资源 -->
-<!--    <security:http pattern="/login.jsp" security="none"/>-->
+    <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/index.jsp" security="none"/>
 <!--    <security:http pattern="/login" security="none"/>-->
 <!--    <security:http pattern="/main.jsp" security="none"/>-->
@@ -17,6 +17,8 @@
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
+<!--    <security:http pattern="/pages/imageCode.jsp" security="none"/>-->
+<!--    <security:http pattern="/imageCode" security="none"/>-->
     <!--
     	配置具体的规则
     	auto-config="true"	不用自己编写登录的页面，框架提供默认登录页面
@@ -28,19 +30,26 @@
 <!--        <security:intercept-url pattern="/login.jsp" access="permitAll()"/>-->
 <!--        <security:intercept-url pattern="/**" access="isFullyAuthenticated()"/>-->
 <!--        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_SUPER')"/>-->
-        <security:intercept-url pattern="/**" access=""/>
+<!--        <security:intercept-url pattern="/**" access=""/>-->
 
 <!--        <security:intercept-url pattern="/**" access="isAuthenticated()"/>-->
 
-<!--        <security:custom-filter ref="myFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>-->
+<!--        <security:intercept-url pattern="/imageCode" access="permitAll()"/>-->
+
+        <security:custom-filter ref="imageCodeAuthenticationFilter" before="FORM_LOGIN_FILTER"/>
+
+        <security:custom-filter ref="myFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
 
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
                 login-page="/login.jsp"
                 login-processing-url="/login"
                 default-target-url="/pages/main.jsp"
-                authentication-failure-url="/failer.jsp"/>
+                authentication-failure-url="/failer.jsp"
+                authentication-failure-handler-ref="myAuthenticationFailureHandler"
+                authentication-success-handler-ref="myAuthenticationSuccessHandler"/>
 <!--                authentication-success-forward-url="/pages/main.jsp"-->
+<!--        authentication-failure-url="/failer.jsp"-->
 
         <!-- 关闭跨域请求 -->
         <security:csrf disabled="true"/>
@@ -50,7 +59,13 @@
         <!-- 如果没有访问权限，配置跳转的页面 -->
         <security:access-denied-handler error-page="/403.jsp"/>
 
+        <!--加上rememberMe功能-->
+        <!--token-validity-seconds 设置有效期,豪秒为单位-->
+        <security:remember-me token-repository-ref="jdbcTokenRepository" token-validity-seconds="3600"/>
+
     </security:http>
+
+
 
     <bean id="myFilterSecurityInterceptor" class="com.rea.tours.security.MyFilterSecurityInterceptor" >
         <property name="accessDecisionManager" ref="myAccessDecisionManager"/>
@@ -77,6 +92,19 @@
     <!--资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
     <bean id="myFilterInvocationSecurityMetadataSource"
           class="com.rea.tours.security.MyFilterInvocationSecurityMetadataSource">
+    </bean>
+
+    <bean id="imageCodeAuthenticationFilter" class="com.rea.tours.security.ImageCodeAuthenticationFilter">
+        <property name="authenticationFailureHandler" ref="myAuthenticationFailureHandler"/>
+    </bean>
+
+    <bean id="myAuthenticationSuccessHandler" class="com.rea.tours.security.MyAuthenticationSuccessHandler"/>
+    <bean id="myAuthenticationFailureHandler" class="com.rea.tours.security.MyAuthenticationFailureHandler"/>
+
+    <bean id="jdbcTokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <!--第一次启用rememberMe是需要，创建persistent_logins表-->
+<!--        <property name="createTableOnStartup" value="true"/>-->
     </bean>
 
     <!-- 提供了入门的方式，在内存中存入用户名和密码

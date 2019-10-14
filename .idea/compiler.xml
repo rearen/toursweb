@@ -10,13 +10,13 @@
         <module name="base-service" />
         <module name="baseweb" />
         <module name="base-security" />
+        <module name="baseservice" />
         <module name="baseutils" />
         <module name="base-web" />
-        <module name="base-domain" />
         <module name="base-utils" />
-        <module name="basedao" />
+        <module name="base-domain" />
         <module name="basedomain" />
-        <module name="baseservice" />
+        <module name="basedao" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

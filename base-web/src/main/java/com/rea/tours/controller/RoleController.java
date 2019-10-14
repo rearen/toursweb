@@ -29,6 +29,15 @@ public class RoleController
         return mv;
     }
 
+    @RequestMapping("/findById")
+    public ModelAndView findById(@RequestParam(name = "id", required = true) String roleid){
+        ModelAndView mv = new ModelAndView();
+        Role role = roleService.findById(roleid);
+        mv.addObject("role", role);
+        mv.setViewName("role-show");
+        return mv;
+    }
+
     @RequestMapping("/save")
     public String save(Role role)
     {
