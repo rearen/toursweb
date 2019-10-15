@@ -9,7 +9,7 @@
         <![CDATA[security Tags]]>
     </description>
     <tlib-version>1.0</tlib-version>
-    <short-name>securitys</short-name>
+    <short-name>mysecurity</short-name>
     <uri>http://www.springsecurity.org/jsp</uri>
 
     <!-- Invoke 'Generate' action to add tags or functions -->

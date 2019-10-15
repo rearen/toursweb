@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="securitys" uri="http://www.springsecurity.org/jsp" %>
+<%@ taglib prefix="mysecurity" uri="http://www.springsecurity.org/jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -246,12 +246,12 @@
                                     <td class="text-center">${orders.orderStatusStr}</td>
                                     <td class="text-center">
                                         <button type="button" class="btn bg-olive btn-xs">订单</button>
-                                        <securitys:authorize buttonUrl="/orders/findById">
+                                        <mysecurity:authorize buttonUrl="/orders/findById">
                                             <button type="button" class="btn bg-olive btn-xs"
                                                              onclick="location.href='${pageContext.request.contextPath}/orders/findById?id=${orders.id}'">
                                             详情
                                             </button>
-                                        </securitys:authorize>
+                                        </mysecurity:authorize>
                                         <button type="button" class="btn bg-olive btn-xs">编辑</button>
                                     </td>
                                 </tr>

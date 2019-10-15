@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="mysecurity" uri="http://www.springsecurity.org/jsp" %>
+
 
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -32,11 +34,11 @@
 
 			</a>
 				<ul class="treeview-menu">
-
+					<mysecurity:authorize buttonUrl="/user/findAll">
 					<li id="system-setting"><a
 						href="${pageContext.request.contextPath}/user/findAll"> <i
 							class="fa fa-circle-o"></i> 用户管理
-					</a></li>
+					</a></li></mysecurity:authorize>
 					<li id="system-setting"><a
 						href="${pageContext.request.contextPath}/role/findAll"> <i
 							class="fa fa-circle-o"></i> 角色管理
@@ -46,7 +48,7 @@
 						<i class="fa fa-circle-o"></i> 资源权限管理</a>
 					</li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/sysLog/findAll"> <i
+						href="${pageContext.request.contextPath}/syslog/findAll"> <i
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 				</ul></li>

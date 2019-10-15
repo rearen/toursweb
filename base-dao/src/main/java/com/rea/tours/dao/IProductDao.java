@@ -16,7 +16,7 @@ public interface IProductDao
     @Select("select * from product where id=#{id}")
     public Product findById(String id) throws Exception;
 
-    @Insert("insert into product(id,productNum,productName,cityName," +
+    @Insert("insert into product(productNum,productName,cityName," +
             "departureTime,productPrice,productDesc,productStatus) " +
             "values(replace(uuid(),'-',''),#{productNum},#{productName},#{cityName}," +
             "#{departureTime},#{productPrice},#{productDesc},#{productStatus})")

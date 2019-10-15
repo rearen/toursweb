@@ -29,8 +29,8 @@ public class OrdersController {
 
     //分页查询
     @RequestMapping("/findAll")
-    public ModelAndView findAll(@RequestParam(name = "page", required = true, defaultValue = "1") int page,
-                                @RequestParam(name = "pageSize", required = true, defaultValue = "4") int pageSize)
+    public ModelAndView findAll(@RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
+                                @RequestParam(name = "pageSize", required = true, defaultValue = "4") Integer pageSize)
             throws Exception {
         List<Orders> ordersList = ordersService.findAllByPage(page, pageSize);
         PageInfo pageInfo = new PageInfo(ordersList);
