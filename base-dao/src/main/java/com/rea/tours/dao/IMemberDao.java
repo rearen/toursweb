@@ -1,6 +1,7 @@
 package com.rea.tours.dao;
 
 import com.rea.tours.domain.Member;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 

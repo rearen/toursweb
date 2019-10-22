@@ -194,7 +194,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.15</version>
+            <version>1.2.25</version>
         </dependency>
     </dependencies>
 
@@ -261,6 +261,7 @@
         <module>base-utils</module>
         <module>base-web</module>
         <module>base-security</module>
+        <module>base-aop</module>
     </modules>
 
 

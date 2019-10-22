@@ -40,12 +40,15 @@ public class AuthorizeTag extends BodyTagSupport
     {
 //        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //        SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        //获取当前登录名
+//        //获取当前登录名
 //        String name = securityContextImpl.getAuthentication().getName();
-        String name = principal.getUsername();
-
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username=null;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
 
         //如果数据库里有该链接，并且该用户的权限拥有该权限，则显示，如果数据库没有该链接则不显示
         IPermissionService permissionService =(IPermissionService) SpringWiredBean.getInstance().getBeanById(
@@ -65,7 +68,7 @@ public class AuthorizeTag extends BodyTagSupport
 //            Permission permission=new Permission();
 //            permission.setUsername(name);
 //            permission.setUrl(buttonUrl);
-            List<Permission> permissionList = permissionService.loadPermission(name);
+            List<Permission> permissionList = permissionService.loadPermission(username);
             //数据库中有该链接，并且该用户拥有该角色，显示
             for (Permission p1 : permissionList)
             {

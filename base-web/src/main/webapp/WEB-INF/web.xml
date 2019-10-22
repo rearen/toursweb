@@ -7,70 +7,72 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <display-name>Archetype Created Web Application</display-name>
+<!--    <display-name>Archetype Created Web Application</display-name>-->
 
-    <!-- 配置加载类路径的配置文件 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml,classpath:spring-security.xml</param-value>
-    </context-param>
-    <!-- 配置监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+<!--    &lt;!&ndash; 配置加载类路径的配置文件 &ndash;&gt;-->
+<!--    <context-param>-->
+<!--        <param-name>contextConfigLocation</param-name>-->
+<!--        <param-value>classpath:applicationContext.xml,classpath:spring-security.xml</param-value>-->
+<!--    </context-param>-->
+<!--    &lt;!&ndash; 配置监听器 &ndash;&gt;-->
+<!--    <listener>-->
+<!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+<!--    </listener>-->
 
-    <!-- 前端控制器（加载classpath:springmvc.xml 服务器启动创建servlet） -->
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!-- 配置初始化参数，创建完DispatcherServlet对象，加载springmvc.xml配置文件 -->
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>
-        </init-param>
-        <!-- 服务器启动的时候，让DispatcherServlet对象创建 -->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+<!--    &lt;!&ndash; 前端控制器（加载classpath:springmvc.xml 服务器启动创建servlet） &ndash;&gt;-->
+<!--    <servlet>-->
+<!--        <servlet-name>dispatcherServlet</servlet-name>-->
+<!--        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+<!--        &lt;!&ndash; 配置初始化参数，创建完DispatcherServlet对象，加载springmvc.xml配置文件 &ndash;&gt;-->
+<!--        <init-param>-->
+<!--            <param-name>contextConfigLocation</param-name>-->
+<!--            <param-value>classpath:spring-mvc.xml</param-value>-->
+<!--        </init-param>-->
+<!--        &lt;!&ndash; 服务器启动的时候，让DispatcherServlet对象创建 &ndash;&gt;-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>dispatcherServlet</servlet-name>-->
+<!--        <url-pattern>/</url-pattern>-->
+<!--    </servlet-mapping>-->
 
-    <!--spring security 安全认证过滤器-->
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    &lt;!&ndash;spring security 安全认证过滤器&ndash;&gt;-->
+<!--    <filter>-->
+<!--        <filter-name>springSecurityFilterChain</filter-name>-->
+<!--        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>springSecurityFilterChain</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
-    <!-- 解决中文乱码过滤器 -->
-    <filter>
-        <filter-name>characterEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <!-- 设置过滤器中的属性值 -->
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <!-- 启动过滤器 -->
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>characterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    &lt;!&ndash; 解决中文乱码过滤器 &ndash;&gt;-->
+<!--    <filter>-->
+<!--        <filter-name>characterEncodingFilter</filter-name>-->
+<!--        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
+<!--        &lt;!&ndash; 设置过滤器中的属性值 &ndash;&gt;-->
+<!--        <init-param>-->
+<!--            <param-name>encoding</param-name>-->
+<!--            <param-value>UTF-8</param-value>-->
+<!--        </init-param>-->
+<!--        &lt;!&ndash; 启动过滤器 &ndash;&gt;-->
+<!--        <init-param>-->
+<!--            <param-name>forceEncoding</param-name>-->
+<!--            <param-value>true</param-value>-->
+<!--        </init-param>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>characterEncodingFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
-    <!-- 设置welcome页面 -->
-    <welcome-file-list>
-        <welcome-file>login.html</welcome-file>
-        <welcome-file>login.htm</welcome-file>
-        <welcome-file>login.jsp</welcome-file>
-    </welcome-file-list>
+<!--    &lt;!&ndash; 设置welcome页面 &ndash;&gt;-->
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>login.html</welcome-file>-->
+<!--        <welcome-file>login.htm</welcome-file>-->
+<!--        <welcome-file>login.jsp</welcome-file>-->
+<!--    </welcome-file-list>-->
+
+
 
 </web-app>

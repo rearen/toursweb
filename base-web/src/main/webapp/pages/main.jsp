@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="mysecurity" uri="http://www.springsecurity.org/jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -143,6 +144,11 @@
 
 			<img src="${pageContext.request.contextPath}/img/center.jpg"
 				width="100%" height="100%" />
+			<mysecurity:authorize buttonUrl="/role/findAll">
+				<a href="${pageContext.request.contextPath}/role/findAll">
+					<i class="fa fa-circle-o">
+
+					</i> 角色管理</a></mysecurity:authorize>
 
 		</div>
 		<!-- 内容区域 /-->

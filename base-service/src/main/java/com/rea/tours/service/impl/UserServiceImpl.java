@@ -9,17 +9,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-@Service("userService")
+@Service
 @Transactional
 public class UserServiceImpl implements IUserService
 {
-    @Autowired
+    @Resource
     private IUserDao userdao;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<UserInfo> findAll()
@@ -31,7 +32,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public void save(UserInfo user)
     {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userdao.save(user);
     }
 

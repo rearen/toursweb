@@ -9,6 +9,7 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +19,7 @@ import java.util.*;
  * 加载资源与权限的对应关系
  */
 
-@Service
+@Component
 public class MyFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource
 {
     @Autowired

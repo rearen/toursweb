@@ -4,8 +4,7 @@ import com.rea.tours.utils.DateUtils;
 
 import java.util.Date;
 
-public class SysLog
-{
+public class SysLog {
     private String id;
     private Date visitTime;
     private String visitTimeStr;
@@ -15,86 +14,70 @@ public class SysLog
     private Long executionTime;
     private String method;
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Date getVisitTime()
-    {
+    public Date getVisitTime() {
         return visitTime;
     }
 
-    public void setVisitTime(Date visitTime)
-    {
+    public void setVisitTime(Date visitTime) {
         this.visitTime = visitTime;
     }
 
-    public String getVisitTimeStr()
-    {
+    public String getVisitTimeStr() {
         if(visitTime!=null){
-            visitTimeStr= DateUtils.date2String(visitTime,"yyyy-MM-dd HH:mm:ss");
+            visitTimeStr= DateUtils.date2String(visitTime, "yyyy-MM-dd HH:mm:ss");
         }
         return visitTimeStr;
     }
 
-    public void setVisitTimeStr(String visitTimeStr)
-    {
+    public void setVisitTimeStr(String visitTimeStr) {
         this.visitTimeStr = visitTimeStr;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getIp()
-    {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(String ip)
-    {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public Long getExecutionTime()
-    {
+    public Long getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(Long executionTime)
-    {
+    public void setExecutionTime(Long executionTime) {
         this.executionTime = executionTime;
     }
 
-    public String getMethod()
-    {
+    public String getMethod() {
         return method;
     }
 
-    public void setMethod(String method)
-    {
+    public void setMethod(String method) {
         this.method = method;
     }
 }
