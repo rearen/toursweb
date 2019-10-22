@@ -261,6 +261,7 @@
         <module>base-utils</module>
         <module>base-web</module>
         <module>base-security</module>
+        <module>base-aop</module>
     </modules>
 
 
